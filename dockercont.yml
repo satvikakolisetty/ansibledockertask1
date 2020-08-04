@@ -1,0 +1,18 @@
+- hosts: test
+  tasks:
+    - name: docker-py install
+      command: pip3 install docker-py
+
+    - name: copy dockerfile
+      copy:
+          src: Dockerfile
+          dest: /root/dockerfile/
+    - name: copy html page
+      copy:
+          src: test.html
+          dest: /root/dockerfile/
+    - name: run dockerfile
+      docker_image:
+           name: webserver
+           path: /root/dockerfile/
+
